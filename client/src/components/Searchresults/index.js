@@ -1,4 +1,5 @@
 import React from "react";
+import SaveBtn from "../SaveBtn/";
 
 function SearchResults(props) {
   return (
@@ -11,9 +12,10 @@ function SearchResults(props) {
             <p>{authors}</p>
           ))}
           <p className="card-text">{props.synop}</p>
-          <a href={props.link} className="btn btn-primary">
+          <a href={props.link} className="btn btn-primary mr-3">
             Buy Me!
           </a>
+          <SaveBtn onClick={props.onClick} />
         </div>
       </div>
     </div>

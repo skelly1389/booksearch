@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import SearchResults from "../components/Searchresults/";
-import SaveBtn from "../components/SaveBtn/";
 
 function Search() {
   const [userSearch, setUserSearch] = useState(" ");
@@ -17,10 +16,10 @@ function Search() {
     API.searchBooks(userSearch)
       .then((res) => {
         if (res.data.status === "error") {
-          window.location.reload();
+          throw new Error(res.data.message);
         }
-        setBookList(res.data.items);
-        console.log(res.data.items);
+        setBookList(res.data);
+        console.log(res.data);
       })
       .catch((err) => setUserSearch("something went wrong"));
   }
@@ -53,10 +52,10 @@ function Search() {
         </div>
       </form>
       <div>
-        {bookList.length ? (
+        {bookList.totalItems > 0 ? (
           <div className="row">
             <h3 className="ml-3">Results:</h3>
-            {bookList.map((book) => (
+            {bookList.items.map((book) => (
               <div className="col-12">
                 <SearchResults
                   key={book.id}
@@ -65,8 +64,8 @@ function Search() {
                   title={book.volumeInfo.title}
                   authors={book.volumeInfo.authors}
                   synop={book.volumeInfo.description}
+                  onClick={() => saveBook(book)}
                 />
-                <SaveBtn onClick={() => saveBook(book)} />
               </div>
             ))}
           </div>

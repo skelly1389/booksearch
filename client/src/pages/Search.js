@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import SearchResults from "../components/Searchresults/";
-import { propTypes } from "react-bootstrap/esm/Image";
+import SaveBtn from "../components/SaveBtn/";
 
 function Search() {
   const [userSearch, setUserSearch] = useState(" ");
@@ -23,6 +23,10 @@ function Search() {
         console.log(res.data.items);
       })
       .catch((err) => setUserSearch("something went wrong"));
+  }
+
+  function saveBook() {
+    console.log("test");
   }
 
   return (
@@ -50,15 +54,20 @@ function Search() {
       </form>
       <div>
         {bookList.length ? (
-          <div>
+          <div className="row">
+            <h3 className="ml-3">Results:</h3>
             {bookList.map((book) => (
-              <SearchResults 
-                link={book.volumeInfo.infoLink}
-                image={book.volumeInfo.imageLinks.thumbnail}
-                title={book.volumeInfo.title}
-                authors={book.volumeInfo.authors}
-                synop={book.volumeInfo.description}
-              />
+              <div className="col-12">
+                <SearchResults
+                  key={book.id}
+                  link={book.volumeInfo.infoLink}
+                  image={book.volumeInfo.imageLinks.smallThumbnail}
+                  title={book.volumeInfo.title}
+                  authors={book.volumeInfo.authors}
+                  synop={book.volumeInfo.description}
+                />
+                <SaveBtn onClick={() => saveBook(book)} />
+              </div>
             ))}
           </div>
         ) : (

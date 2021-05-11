@@ -15,7 +15,8 @@ function SearchResults(props) {
           <a href={props.link} className="btn btn-primary mr-3">
             Buy Me!
           </a>
-          <SaveBtn onClick={props.onClick} />
+          <SaveBtn
+           onClick={props.onClick} />
         </div>
       </div>
     </div>

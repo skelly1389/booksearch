@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import API from "../utils/API";
 import SearchResults from "../components/Searchresults/";
 
 function Search() {
   const [userSearch, setUserSearch] = useState(" ");
   const [bookList, setBookList] = useState([]);
-  // const [book, setBook] = useState({});
 
   function handleInputChange(event) {
     setUserSearch(event.target.value);
@@ -24,15 +23,23 @@ function Search() {
       .catch((err) => setUserSearch("something went wrong"));
   }
 
-  function saveBook() {
-    console.log("test");
+  function saveBook(id) {
+    API.saveBook({
+      link: id.volumeInfo.infoLink,
+      image: id.volumeInfo.imageLinks.thumbnail,
+      title: id.volumeInfo.title,
+      authors: id.volumeInfo.authors,
+      synop: id.volumeInfo.description,
+    });
+    console.log(id)
   }
 
   return (
     <div>
+      <h2 className="text-primary">Book Search</h2>
       <form className="search">
         <div className="form-group">
-          <label htmlFor="books">Book Search</label>
+          <label htmlFor="books">Book:</label>
           <input
             value={userSearch}
             onChange={handleInputChange}
@@ -60,7 +67,7 @@ function Search() {
                 <SearchResults
                   key={book.id}
                   link={book.volumeInfo.infoLink}
-                  image={book.volumeInfo.imageLinks.smallThumbnail}
+                  image={book.volumeInfo.imageLinks.thumbnail} 
                   title={book.volumeInfo.title}
                   authors={book.volumeInfo.authors}
                   synop={book.volumeInfo.description}

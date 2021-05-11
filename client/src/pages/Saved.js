@@ -37,7 +37,7 @@ function Saved() {
                 title={book.title}
                 authors={book.authors}
                 synop={book.description}
-                onClick={() => deleteBook(book)}
+                onClick={() => deleteBook(book._id)}
               />
             </div>
           ))}

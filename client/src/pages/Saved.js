@@ -25,13 +25,13 @@ function Saved() {
 
   return (
     <div>
-      {books > 0 ? (
+      {books.length > 0 ? (
         <div className="row">
           <h3 className="ml-3">Saved Books:</h3>
-          {books.items.map((book) => (
+          {books.map((book) => (
             <div className="col-12">
               <SavedResults
-                key={book.id}
+                key={book._id}
                 link={book.link}
                 image={book.image}
                 title={book.title}

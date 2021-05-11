@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteBtn from "../DeleteBtn/";
 
-function SearchResults(props) {
+function SavedResults(props) {
   return (
     <div key={props.key} className="row">
       <img className="col-3" src={props.image} alt={props.title + " cover"} />
@@ -23,4 +23,4 @@ function SearchResults(props) {
   );
 }
 
-export default SearchResults;
+export default SavedResults;

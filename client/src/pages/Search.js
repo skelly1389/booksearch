@@ -29,7 +29,7 @@ function Search() {
       image: id.volumeInfo.imageLinks.thumbnail,
       title: id.volumeInfo.title,
       authors: id.volumeInfo.authors,
-      synop: id.volumeInfo.description,
+      description: id.volumeInfo.description,
     });
     console.log(id)
   }

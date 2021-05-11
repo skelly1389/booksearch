@@ -17,7 +17,7 @@ function Search() {
     API.searchBooks(userSearch)
       .then((res) => {
         if (res.data.status === "error") {
-          throw new Error(res.data.message);
+          window.location.reload();
         }
         setBookList(res.data.items);
         console.log(res.data.items);
